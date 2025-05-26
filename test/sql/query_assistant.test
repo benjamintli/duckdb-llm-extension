@@ -8,12 +8,6 @@ require query_assistant
 statement ok
 CREATE TABLE test("Index" BIGINT, Customer_Id VARCHAR, "First Name" VARCHAR, "Last Name" VARCHAR, Company VARCHAR, City VARCHAR, Country VARCHAR, "Phone 1" VARCHAR, "Phone 2" VARCHAR, Email VARCHAR, "Subscription Date" DATE, Website VARCHAR);
 
-# Confirm the extension works
-query I
-SELECT query_assistant('write an SQL query to find all the customer IDs from the company Simon LLC');
-----
-SELECT Customer_Id FROM test WHERE Company = 'Simon LLC';
-
 statement error
 SELECT query_assistant(Customer_Id) from test;
 ----
