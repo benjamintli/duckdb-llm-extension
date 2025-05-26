@@ -6,7 +6,7 @@
 require query_assistant
 
 statement ok
-CREATE TABLE test AS SELECT * FROM '/Users/benjaminli/Downloads/customers-100.csv';
+CREATE TABLE test("Index" BIGINT, Customer_Id VARCHAR, "First Name" VARCHAR, "Last Name" VARCHAR, Company VARCHAR, City VARCHAR, Country VARCHAR, "Phone 1" VARCHAR, "Phone 2" VARCHAR, Email VARCHAR, "Subscription Date" DATE, Website VARCHAR);
 
 # Confirm the extension works
 query I

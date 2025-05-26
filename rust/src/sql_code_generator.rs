@@ -12,8 +12,6 @@ use chat_templates::{apply_template, Message};
 use hf_hub::{api::sync::Api, Repo, RepoType};
 use tokenizers::Tokenizer;
 
-const FOO: &'static str = "{}\nSQL:{}";
-
 pub struct SqlCodeGenerator {
     model: ModelForCausalLM,
     device: Device,

@@ -85,7 +85,7 @@ if(APPLE)
         "-framework MetalPerformanceShaders"
     )
 elseif (WIN32)
-    target_link_libraries(text_embedding_rust INTERFACE bcrypt)
+    target_link_libraries(sql_assistant_rust INTERFACE bcrypt)
 endif()
 
 # Set extension name here
