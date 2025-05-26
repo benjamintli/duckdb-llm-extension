@@ -21,6 +21,13 @@ pub struct SqlCodeGenerator {
     repeat_last_n: usize,
 }
 
+fn get_device() -> Result<Device, Error> {
+    #[cfg(target_os = "macos")]
+    return Ok(Device::new_metal(0)?);
+    #[cfg(not(target_os = "macos"))]
+    return Ok(Device::Cpu);
+}
+
 impl SqlCodeGenerator {
     pub fn new() -> Result<Self, Error> {
         let api = Api::new()?;
@@ -36,7 +43,8 @@ impl SqlCodeGenerator {
 
         let config_file = repo.get("config.json")?;
         let dtype = DType::F32;
-        let vb = unsafe { VarBuilder::from_mmaped_safetensors(&filenames, dtype, &Device::Cpu)? };
+        let device = get_device()?;
+        let vb = unsafe { VarBuilder::from_mmaped_safetensors(&filenames, dtype, &device)? };
         let config: Config = serde_json::from_slice(&std::fs::read(config_file)?)?;
         let model = ModelForCausalLM::new(&config, vb)?;
         let logits_processor = LogitsProcessor::new(299792458, Some(0.0), None);
@@ -46,7 +54,7 @@ impl SqlCodeGenerator {
             logits_processor,
             repeat_penalty: 1.10,
             repeat_last_n: 64,
-            device: Device::Cpu,
+            device: device,
         })
     }
 
