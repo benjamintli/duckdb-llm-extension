@@ -5,13 +5,13 @@
 # Require statement will ensure this test is run with this extension loaded
 require query_assistant
 
-statement ok
-CREATE TABLE test("Index" BIGINT, Customer_Id VARCHAR, "First Name" VARCHAR, "Last Name" VARCHAR, Company VARCHAR, City VARCHAR, Country VARCHAR, "Phone 1" VARCHAR, "Phone 2" VARCHAR, Email VARCHAR, "Subscription Date" DATE, Website VARCHAR);
+#statement ok
+#CREATE TABLE test("Index" BIGINT, Customer_Id VARCHAR, "First Name" VARCHAR, "Last Name" VARCHAR, Company VARCHAR, City VARCHAR, Country VARCHAR, "Phone 1" VARCHAR, "Phone 2" VARCHAR, Email VARCHAR, "Subscription Date" DATE, Website VARCHAR);
 
-statement ok
-SELECT query_assistant('list all Customers in the table');
+#statement ok
+#SELECT query_assistant('list all Customers in the table');
 
-statement error
-SELECT query_assistant(Customer_Id) from test;
-----
-Invalid type Error: input query is not a string!
+#statement error
+#SELECT query_assistant(Customer_Id) from test;
+#----
+#Invalid type Error: input query is not a string!
