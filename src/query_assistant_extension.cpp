@@ -1,6 +1,7 @@
 #include "duckdb.h"
 #include "duckdb/common/helper.hpp"
 #include "duckdb/execution/expression_executor_state.hpp"
+#include "duckdb/function/pragma_function.hpp"
 #include "duckdb/main/query_profiler.hpp"
 #define DUCKDB_EXTENSION_MAIN
 
@@ -19,10 +20,10 @@ namespace duckdb {
 
 inline std::string get_ddl_statements(ExpressionState &state) {
 	Connection conn(*(state.GetContext().db));
-	auto query = conn.Query("SELECT sql from duckdb_tables();");
+	auto query = conn.Query("SELECT sql from duckdb_tables() where database_name != 'localmemdb'");
 	std::string ddl_statement;
 	for (idx_t i = 0; i < query->RowCount(); i++) {
-		ddl_statement.append(query->GetValue(i, 0).ToString());
+		ddl_statement.append(query->GetValue(0, i).ToString());
 	}
 	return ddl_statement;
 }
