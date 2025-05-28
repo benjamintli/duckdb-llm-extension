@@ -9,12 +9,6 @@ statement ok
 CREATE TABLE test("Index" BIGINT, Customer_Id VARCHAR, "First Name" VARCHAR, "Last Name" VARCHAR, Company VARCHAR, City VARCHAR, Country VARCHAR, "Phone 1" VARCHAR, "Phone 2" VARCHAR, Email VARCHAR, "Subscription Date" DATE, Website VARCHAR);
 
 statement ok
-CREATE TABLE ontime AS SELECT * FROM '~/Downloads/customers-100.csv';
-
-statement ok
-SELECT query_assistant('list all Customers in the table');
-
-statement ok
 SELECT query_assistant('list all Customers in the table');
 
 statement error
